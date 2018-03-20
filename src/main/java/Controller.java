@@ -1,3 +1,4 @@
+import models.RandomNames;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,7 +18,7 @@ public class Controller {
 //        i have added an arraylist of names but im not sure how this will work with a hashmap,
 //        check with instructors. i thought the shuffle would give the random names that i need.
 //        i have added to $result to the result.vtl file.
-        get ("/randomname", (Request req, Response res) -> {
+        get ("/randomnames", (req, res) -> {
             ArrayList<String> names = new ArrayList<>();
             names.add("Emma");
             names.add("Jean");
@@ -38,10 +39,23 @@ public class Controller {
             names.add("Paul");
             names.add("Steven");
             Collections.shuffle(names);
+            String result = names.add();
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("result", result );
+            return new ModelAndView(model, "result.vtl");
+        },  velocityTemplateEngine);
+
+//        im not sure that add function is what i wanted, tried amending parseString to add name1 and name2 together
+
+        get("/add/:name1/:name2", (Request req, Response res) -> {
+            String name1 = String.parseInt(req.params(":name1"));
+            String name2 = String.parseInt(req.params(":name2"));
+            RandomNames names = new RandomNames(name1, name2);
+            String result = names.add();
             HashMap<String, Object> model = new HashMap<>();
             model.put("result", result);
             return new ModelAndView(model, "result.vtl");
-        },  velocityTemplateEngine);
+        }, velocityTemplateEngine);
 
     }
 }

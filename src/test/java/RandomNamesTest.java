@@ -15,12 +15,12 @@ public class RandomNamesTest {
 
     @Test
     public void hasName1() {
-        assertEquals("Emma", names.getRandomname1());
+        assertEquals("Emma", names.getName1());
     }
 
     @Test
     public void hasName2() {
-        assertEquals("Sarah", names.getRandomname2());
+        assertEquals("Sarah", names.getName2());
     }
 
 }
